@@ -10,8 +10,9 @@ public class Parallax : MonoBehaviour
 
     void Start()
     {
+        float pixelSize = 1f / 16;
         // Duplicate the background sprite
-        background2 = Instantiate(background, new Vector3(background.transform.position.x + background.GetComponent<SpriteRenderer>().bounds.size.x, background.transform.position.y, background.transform.position.z), Quaternion.identity);
+        background2 = Instantiate(background, new Vector3(background.transform.position.x + background.GetComponent<SpriteRenderer>().bounds.size.x - pixelSize, background.transform.position.y, background.transform.position.z), Quaternion.identity);
 
         // Get the width of the sprite
         spriteWidth = background.GetComponent<SpriteRenderer>().bounds.size.x;
