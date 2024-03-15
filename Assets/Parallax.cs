@@ -4,6 +4,7 @@ public class Parallax : MonoBehaviour
 {
     public GameObject background;
     public float speed = 0.5f;
+    public bool moveRight = false;
 
     private GameObject background2;
     private float spriteWidth;
@@ -20,18 +21,28 @@ public class Parallax : MonoBehaviour
 
     void Update()
     {
-        // Move the sprites to the left
-        background.transform.Translate(-speed * Time.deltaTime, 0, 0);
-        background2.transform.Translate(-speed * Time.deltaTime, 0, 0);
+        // Move the sprites
+        float direction = moveRight ? 1 : -1;
+        background.transform.Translate(direction * speed * Time.deltaTime, 0, 0);
+        background2.transform.Translate(direction * speed * Time.deltaTime, 0, 0);
 
-        // If one sprite is off the screen, move it to the right side of the other sprite
-        if (background.transform.position.x < -spriteWidth)
+        // If one sprite is off the screen, move it to the other side
+        if (background.transform.position.x < -spriteWidth && !moveRight)
         {
             background.transform.position = new Vector3(background2.transform.position.x + spriteWidth, background.transform.position.y, background.transform.position.z);
         }
-        if (background2.transform.position.x < -spriteWidth)
+        else if (background.transform.position.x > spriteWidth && moveRight)
+        {
+            background.transform.position = new Vector3(background2.transform.position.x - spriteWidth, background.transform.position.y, background.transform.position.z);
+        }
+
+        if (background2.transform.position.x < -spriteWidth && !moveRight)
         {
             background2.transform.position = new Vector3(background.transform.position.x + spriteWidth, background2.transform.position.y, background2.transform.position.z);
+        }
+        else if (background2.transform.position.x > spriteWidth && moveRight)
+        {
+            background2.transform.position = new Vector3(background.transform.position.x - spriteWidth, background2.transform.position.y, background2.transform.position.z);
         }
     }
 }
