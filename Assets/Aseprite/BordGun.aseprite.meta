@@ -123,7 +123,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: BordGun_Frame_0
     originalName: 
-    pivot: {x: 1.1666667, y: -0.25}
+    pivot: {x: 0.5095821, y: 0.0055325828}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -143,7 +143,7 @@ ScriptedImporter:
     uvTransform: {x: 2, y: 102}
   - name: BordGun_Frame_1
     originalName: 
-    pivot: {x: 0.72727275, y: -0.25}
+    pivot: {x: 0.03700187, y: 0.017701149}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -163,7 +163,7 @@ ScriptedImporter:
     uvTransform: {x: 26, y: 21}
   - name: BordGun_Frame_2
     originalName: 
-    pivot: {x: 0.47058824, y: -0.25}
+    pivot: {x: 0.0067642718, y: 0.042037327}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -183,7 +183,7 @@ ScriptedImporter:
     uvTransform: {x: -4, y: 62}
   - name: BordGun_Frame_3
     originalName: 
-    pivot: {x: 0.3809524, y: -0.27272728}
+    pivot: {x: 0.012429124, y: 0.032584623}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -203,7 +203,7 @@ ScriptedImporter:
     uvTransform: {x: -4, y: 24}
   - name: BordGun_Frame_4
     originalName: 
-    pivot: {x: 0.36363637, y: -0.20000002}
+    pivot: {x: 0.025138594, y: 0.014160919}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -223,7 +223,7 @@ ScriptedImporter:
     uvTransform: {x: -4, y: 1}
   - name: BordGun_Frame_5
     originalName: 
-    pivot: {x: 0.3809524, y: -0.27272728}
+    pivot: {x: 0.019382386, y: 0.03258445}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -243,7 +243,7 @@ ScriptedImporter:
     uvTransform: {x: -4, y: 43}
   - name: BordGun_Frame_6
     originalName: 
-    pivot: {x: 0.47058824, y: -0.25}
+    pivot: {x: 0.0067642718, y: 0.042037327}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -263,7 +263,7 @@ ScriptedImporter:
     uvTransform: {x: -4, y: 82}
   - name: BordGun_Frame_7
     originalName: 
-    pivot: {x: 0.72727275, y: -0.25}
+    pivot: {x: 0.03700187, y: 0.054205894}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -283,7 +283,7 @@ ScriptedImporter:
     uvTransform: {x: 26, y: 41}
   - name: BordGun_Frame_8
     originalName: 
-    pivot: {x: 1.1666667, y: -0.25}
+    pivot: {x: 0.5095822, y: -0.0066352882}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:

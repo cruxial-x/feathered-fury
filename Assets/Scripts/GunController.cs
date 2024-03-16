@@ -6,7 +6,7 @@ public class DestroyAfterAnimation : MonoBehaviour
 {
     public GameObject ProjectilePrefab;
     private GameObject firePoint;
-    private AudioSource audioSource;
+    public AudioSource audioSource;
     public float projectileForce = 5;
 
     // Start is called before the first frame update
@@ -15,7 +15,7 @@ public class DestroyAfterAnimation : MonoBehaviour
         float animationLength = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length;
         Destroy(gameObject, animationLength);
         firePoint = GameObject.Find("firePoint");
-        audioSource = firePoint.GetComponent<AudioSource>();
+        audioSource = GameObject.Find("Bang").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -30,6 +30,7 @@ public class DestroyAfterAnimation : MonoBehaviour
         Debug.Log("Firing Projectile");
         audioSource.Play();
         GameObject Projectile = Instantiate(ProjectilePrefab, firePoint.transform.position, transform.rotation);
+        Projectile.transform.parent = null;
         // Get the Projectile's rigidbody
         Rigidbody2D ProjectileRb = Projectile.GetComponent<Rigidbody2D>();
         Debug.Log("ProjectilePrefab: " + Projectile.transform.position);
