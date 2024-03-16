@@ -240,8 +240,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverScreen: {fileID: 1072558551}
-  restartButtonText: {fileID: 0}
-  restartDelay: 3
 --- !u!1 &25912857
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,7 +737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 771567671}
-  gameController: {fileID: 0}
+  gameController: {fileID: 18833344}
   gunPrefab: {fileID: 0}
   timeBetweenShots: 0.5
   scoreText: {fileID: 2088797323}
@@ -1424,12 +1422,12 @@ GameObject:
   - component: {fileID: 2128930296}
   - component: {fileID: 2128930295}
   m_Layer: 0
-  m_Name: Grid
+  m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2128930295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1443,14 +1441,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pipePrefab: {fileID: 7655594692200275517, guid: 2e5508fb0ef908e44a3c26bcc9efd783, type: 3}
-  cloudPrefab: {fileID: 0}
+  cloudPrefab: {fileID: 5846341350518431668, guid: 52605699f7884114ba95e0ae9bdd1e16, type: 3}
   bossCloudPrefab: {fileID: 0}
   bird: {fileID: 771567670}
   pipeSpawnRate: 3
-  cloudSpawnRate: 2
+  cloudSpawnRate: 6
   delay: 3
   cloudsBeforeEvil: 5
-  cloudOffset: 2
+  cloudOffset: 3
   minHeight: 3
   maxHeight: -3
 --- !u!156049354 &2128930296

@@ -7,8 +7,6 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     public GameObject gameOverScreen;
-    public Text restartButtonText;
-    public float restartDelay = 3f;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,15 +16,21 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(GameOverScreenIsActive() && Input.GetKeyDown(KeyCode.Space))
+        {
+            RestartGame();
+        }
     }
 
     public void GameOver()
     {
         gameOverScreen.SetActive(true);
     }
-    
-    public void RestartGame()
+    bool GameOverScreenIsActive()
+    {
+        return gameOverScreen.activeSelf;
+    }
+    void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
