@@ -108,7 +108,7 @@ public class BirdController : MonoBehaviour
     }
     private void ShootGun()
     {
-        StartCoroutine(Bang());
+        // StartCoroutine(Bang());
         Instantiate(gunPrefab, transform);
     }
     IEnumerator Bang()
