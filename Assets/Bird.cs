@@ -28,6 +28,7 @@ public class BirdController : MonoBehaviour
 
 private float lastFlapTime;
 public float flightTime = 0.5f;
+public float fallRotationSpeed = 3;
 private bool justFlapped = false;
 
 void Update()
@@ -50,8 +51,10 @@ void Update()
         justFlapped = false;
         // Calculate and apply angle based on vertical velocity
         float angle = rb.velocity.y * 10;
-        angle = Mathf.Clamp(angle, -90, 30);
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        angle = Mathf.Clamp(angle, -90, 25);
+        // Interpolate rotation over time for smoother transition
+        Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * fallRotationSpeed);
     }
 
     if (!isAlive)
