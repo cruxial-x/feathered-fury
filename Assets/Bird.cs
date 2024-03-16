@@ -33,6 +33,14 @@ public class BirdController : MonoBehaviour
         {
             rb.velocity = Vector2.up * flapForce;
         }
+        // Calculate the angle based on the vertical velocity
+        float angle = rb.velocity.y * 10;
+
+        // Clamp the angle to a range of -90 to 45 degrees
+        angle = Mathf.Clamp(angle, -90, 45);
+
+        // Apply the rotation to the bird's transform
+        transform.rotation = Quaternion.Euler(0, 0, angle);
         // // Shoot the gun when the player presses Fire3
         // if (Input.GetButtonDown("Fire1") && Time.time > timeOfLastShot + timeBetweenShots)
         // {
@@ -80,8 +88,8 @@ public class BirdController : MonoBehaviour
         if (score > highScore)
         {
             highScore = score;
-            PlayerPrefs.SetInt("HighScore", highScore);
-            UpdateHighScoreText();
+            // PlayerPrefs.SetInt("HighScore", highScore);
+            // UpdateHighScoreText();
         }
     }
     public void DecreaseScore()
