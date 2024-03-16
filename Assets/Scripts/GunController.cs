@@ -5,16 +5,17 @@ using UnityEngine;
 public class DestroyAfterAnimation : MonoBehaviour
 {
     public GameObject ProjectilePrefab;
-
+    private GameObject firePoint;
+    private AudioSource audioSource;
     public float projectileForce = 5;
 
     // Start is called before the first frame update
     void Start()
     {
         float animationLength = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length;
-        Debug.Log("Animation Length: " + animationLength);
-        StartCoroutine(FireProjectileAtHalfAnimation(animationLength / 2));
         Destroy(gameObject, animationLength);
+        firePoint = GameObject.Find("firePoint");
+        audioSource = firePoint.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -23,20 +24,11 @@ public class DestroyAfterAnimation : MonoBehaviour
         
     }
 
-    private IEnumerator FireProjectileAtHalfAnimation(float delay)
-    {
-        // Wait for half the animation time
-        yield return new WaitForSeconds(delay);
-        // Fire the Projectile
-        FireProjectile();
-    }
-
+    #pragma warning disable IDE0051 // Used in BordGun animation event
     private void FireProjectile()
     {
-        GameObject firePoint = GameObject.Find("firePoint");
-        Debug.Log("firePoint: " + firePoint.transform.position); 
-        // Create a new Projectile at the bird's position
-
+        Debug.Log("Firing Projectile");
+        audioSource.Play();
         GameObject Projectile = Instantiate(ProjectilePrefab, firePoint.transform);
         // Get the Projectile's rigidbody
         Rigidbody2D ProjectileRb = Projectile.GetComponent<Rigidbody2D>();
@@ -44,5 +36,6 @@ public class DestroyAfterAnimation : MonoBehaviour
         // Add force to the Projectile
         ProjectileRb.AddForce(Vector2.right * projectileForce, ForceMode2D.Impulse);
     }
+    #pragma warning restore IDE0051
 }
 

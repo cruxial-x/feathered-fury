@@ -26,35 +26,39 @@ public class BirdController : MonoBehaviour
         isAlive = true;
     }
 
-private float lastFlapTime;
-public float flightTime = 0.5f;
-public float fallRotationSpeed = 3;
-private bool justFlapped = false;
+// private float lastFlapTime;
+// public float flightTime = 0.5f;
+// public float fallRotationSpeed = 3;
+// private bool justFlapped = false;
 
 void Update()
 {
     // Flap detection with smoothed force application
-    if((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && isAlive)
+    if(Input.GetKeyDown(KeyCode.Space))
     {
         rb.velocity = Vector2.up * flapForce;
-        lastFlapTime = Time.time;
-        justFlapped = true;
+        // lastFlapTime = Time.time;
+        // justFlapped = true;
     }
 
-    if (Time.time - lastFlapTime < flightTime && justFlapped)
+    // if (Time.time - lastFlapTime < flightTime && justFlapped)
+    // {
+    //     // Maintain upward angle for a short duration after flapping
+    //     transform.rotation = Quaternion.Euler(0, 0, 25); // Adjust this angle as needed
+    // }
+    // else
+    // {
+    //     justFlapped = false;
+    //     // Calculate and apply angle based on vertical velocity
+    //     float angle = rb.velocity.y * 10;
+    //     angle = Mathf.Clamp(angle, -90, 25);
+    //     // Interpolate rotation over time for smoother transition
+    //     Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
+    //     transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * fallRotationSpeed);
+    // }
+    if(Input.GetButtonDown("Fire1") && Time.time - timeOfLastShot > timeBetweenShots)
     {
-        // Maintain upward angle for a short duration after flapping
-        transform.rotation = Quaternion.Euler(0, 0, 25); // Adjust this angle as needed
-    }
-    else
-    {
-        justFlapped = false;
-        // Calculate and apply angle based on vertical velocity
-        float angle = rb.velocity.y * 10;
-        angle = Mathf.Clamp(angle, -90, 25);
-        // Interpolate rotation over time for smoother transition
-        Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * fallRotationSpeed);
+        ShootGun();
     }
 
     if (!isAlive)
@@ -120,21 +124,11 @@ void Update()
     }
     private void ShootGun()
     {
-        // StartCoroutine(Bang());
-        Instantiate(gunPrefab, transform);
-    }
-    IEnumerator Bang()
-    {
-        // Get the AudioSource from the GameObject and play it after 0.55 seconds
-        AudioSource audioSource = GetComponent<AudioSource>();
-        if (audioSource != null)
+        // Check if an instance of gunPrefab already exists
+        if (FindObjectOfType<DestroyAfterAnimation>() == null)
         {
-            yield return new WaitForSeconds(timeBetweenShots / 2);
-            audioSource.Play();
-        }
-        else
-        {
-            Debug.Log("No AudioSource found on this GameObject.");
+            // If not, instantiate a new one
+            Instantiate(gunPrefab, transform);
         }
     }
 }
