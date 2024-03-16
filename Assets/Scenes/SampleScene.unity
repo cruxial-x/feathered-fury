@@ -356,7 +356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   background: {fileID: 25912857}
-  speed: 0
+  speed: 0.5
   moveRight: 0
 --- !u!4 &121666634
 Transform:
@@ -970,7 +970,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   background: {fileID: 1141089514}
-  speed: 0.5
+  speed: 0.7
   moveRight: 0
 --- !u!4 &938217663
 Transform:
@@ -1313,7 +1313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   background: {fileID: 871802734}
-  speed: 0.7
+  speed: 0.8
   moveRight: 0
 --- !u!4 &2030518516
 Transform:
