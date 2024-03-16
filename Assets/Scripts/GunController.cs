@@ -38,6 +38,16 @@ public class DestroyAfterAnimation : MonoBehaviour
         // Get the direction based on the rotation of the firing object
         Vector2 direction = transform.right;
 
+        // Adjust the direction for the offset of the firePoint
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 directionToMouse = (mousePosition - firePoint.transform.position).normalized;
+        direction = Vector2.Lerp(direction, directionToMouse, 0.8f);
+
+        // Clamp the angle of the direction vector
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        angle = Mathf.Clamp(angle, -45, 45);
+        direction = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
+
         // Add force to the Projectile in the direction of the firing object
         ProjectileRb.AddForce(direction * projectileForce, ForceMode2D.Impulse);
     }
