@@ -26,32 +26,42 @@ public class BirdController : MonoBehaviour
         isAlive = true;
     }
 
-    // Update is called once per frame
-    void Update()
+private float lastFlapTime;
+public float flightTime = 0.5f;
+private bool justFlapped = false;
+
+void Update()
+{
+    // Flap detection with smoothed force application
+    if((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && isAlive)
     {
-        if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-        {
-            rb.velocity = Vector2.up * flapForce;
-        }
-        // Calculate the angle based on the vertical velocity
-        float angle = rb.velocity.y * 10;
-
-        // Clamp the angle to a range of -90 to 45 degrees
-        angle = Mathf.Clamp(angle, -90, 45);
-
-        // Apply the rotation to the bird's transform
-        transform.rotation = Quaternion.Euler(0, 0, angle);
-        // // Shoot the gun when the player presses Fire3
-        // if (Input.GetButtonDown("Fire1") && Time.time > timeOfLastShot + timeBetweenShots)
-        // {
-        //     ShootGun();
-        //     timeOfLastShot = Time.time;
-        // }
-        if (!isAlive){
-            // gameController.GameOver();
-            Destroy(gameObject);
-        }
+        rb.velocity = Vector2.up * flapForce;
+        lastFlapTime = Time.time;
+        justFlapped = true;
     }
+
+    if (Time.time - lastFlapTime < flightTime && justFlapped)
+    {
+        // Maintain upward angle for a short duration after flapping
+        transform.rotation = Quaternion.Euler(0, 0, 25); // Adjust this angle as needed
+    }
+    else
+    {
+        justFlapped = false;
+        // Calculate and apply angle based on vertical velocity
+        float angle = rb.velocity.y * 10;
+        angle = Mathf.Clamp(angle, -90, 30);
+        transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
+
+    if (!isAlive)
+    {
+        // Uncomment or modify this line according to your game's logic
+        // gameController.GameOver();
+        Destroy(gameObject);
+    }
+}
+
     public int GetCloudHitCount()
     {
         return cloudHitCount;
