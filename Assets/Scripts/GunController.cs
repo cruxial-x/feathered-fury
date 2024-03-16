@@ -29,12 +29,16 @@ public class DestroyAfterAnimation : MonoBehaviour
     {
         Debug.Log("Firing Projectile");
         audioSource.Play();
-        GameObject Projectile = Instantiate(ProjectilePrefab, firePoint.transform);
+        GameObject Projectile = Instantiate(ProjectilePrefab, firePoint.transform.position, transform.rotation);
         // Get the Projectile's rigidbody
         Rigidbody2D ProjectileRb = Projectile.GetComponent<Rigidbody2D>();
         Debug.Log("ProjectilePrefab: " + Projectile.transform.position);
-        // Add force to the Projectile
-        ProjectileRb.AddForce(Vector2.right * projectileForce, ForceMode2D.Impulse);
+
+        // Get the direction based on the rotation of the firing object
+        Vector2 direction = transform.right;
+
+        // Add force to the Projectile in the direction of the firing object
+        ProjectileRb.AddForce(direction * projectileForce, ForceMode2D.Impulse);
     }
     #pragma warning restore IDE0051
 }

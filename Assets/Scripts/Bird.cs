@@ -128,7 +128,17 @@ void Update()
         if (FindObjectOfType<DestroyAfterAnimation>() == null)
         {
             // If not, instantiate a new one
-            Instantiate(gunPrefab, transform);
+            GameObject gun = Instantiate(gunPrefab, transform);
+
+            // Get the direction to the mouse
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 direction = (mousePosition - transform.position).normalized;
+
+            // Calculate the rotation to face the mouse
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            angle = Mathf.Clamp(angle, -45, 45);
+            // Set the rotation of the gun
+            gun.transform.rotation = Quaternion.Euler(0, 0, angle);
         }
     }
 }
