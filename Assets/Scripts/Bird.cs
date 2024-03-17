@@ -17,6 +17,8 @@ public class BirdController : MonoBehaviour
     private int highScore;
     private bool isAlive;
     public float flapForce = 5;
+    public List<IPowerUp> activePowerUps = new List<IPowerUp>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +42,10 @@ void Update()
         // lastFlapTime = Time.time;
         // justFlapped = true;
     }
+    foreach (var powerUp in activePowerUps)
+    {
+        powerUp.Update();
+    }
 
     // if (Time.time - lastFlapTime < flightTime && justFlapped)
     // {
@@ -56,10 +62,6 @@ void Update()
     //     Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
     //     transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * fallRotationSpeed);
     // }
-    if(Input.GetButtonDown("Fire1") && Time.time - timeOfLastShot > timeBetweenShots)
-    {
-        ShootGun();
-    }
 
     if (!isAlive)
     {
@@ -95,6 +97,11 @@ void Update()
         {
             IncrementScore();
         }
+        if (collider.gameObject.TryGetComponent<IPowerUp>(out var powerUp))
+        {
+            powerUp.Apply(this);
+            activePowerUps.Add(powerUp);
+        }
     }
         // Call this method when the bird clears a pipe
     public void IncrementScore(int count = 1)
@@ -121,24 +128,5 @@ void Update()
     {
         highScoreText.text = "  High Score: " + highScore;
         Debug.Log(highScoreText.text);
-    }
-    private void ShootGun()
-    {
-        // Check if an instance of gunPrefab already exists
-        if (FindObjectOfType<DestroyAfterAnimation>() == null)
-        {
-            // If not, instantiate a new one
-            GameObject gun = Instantiate(gunPrefab, transform);
-
-            // Get the direction to the mouse
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3 direction = (mousePosition - transform.position).normalized;
-
-            // Calculate the rotation to face the mouse
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            angle = Mathf.Clamp(angle, -45, 45);
-            // Set the rotation of the gun
-            gun.transform.rotation = Quaternion.Euler(0, 0, angle);
-        }
     }
 }
