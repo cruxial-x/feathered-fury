@@ -15,5 +15,10 @@ public class PipeMover : MonoBehaviour
     void Update()
     {
         transform.position += Vector3.left * speed * Time.deltaTime;
+        // If the object has moved off the screen to the left, destroy it
+        if (transform.position.x < -10f) // Adjust this value as needed
+        {
+            Destroy(gameObject);
+        }
     }
 }

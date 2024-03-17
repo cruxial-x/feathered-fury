@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PipeController : MonoBehaviour
@@ -8,6 +9,7 @@ public class PipeController : MonoBehaviour
     public GameObject cloudPrefab;
     public GameObject bossCloudPrefab;
     public BirdController bird;
+    public List<GameObject> powerUps;
     public float pipeSpawnRate = 2f;
     public float cloudSpawnRate = 2f;
     public float delay = 3f;
@@ -33,6 +35,9 @@ public class PipeController : MonoBehaviour
         {
             SpawnBossCloud();
         }
+
+        SpawnPowerUp();
+        
     }
 
     void SpawnPipe()
@@ -57,5 +62,24 @@ public class PipeController : MonoBehaviour
     {
         Vector2 spawnPosition = new(transform.position.x, transform.position.y);
         Instantiate(bossCloudPrefab, spawnPosition, Quaternion.identity);
+    }
+    private readonly Dictionary<IPowerUp, GameObject> instantiatedPowerUps = new();
+
+    void SpawnPowerUp()
+    {
+        foreach (var powerUpPrefab in powerUps)
+        {   
+            var powerUp = powerUpPrefab.GetComponent<IPowerUp>();
+            bool birdNeedsPoints = bird.score < powerUp.PointsRequired;
+            bool birdHasPowerup = bird.activePowerUps.Any(activePowerUp => activePowerUp.PowerUpName == powerUp.PowerUpName);
+            if(birdNeedsPoints || birdHasPowerup)
+            {
+                continue;
+            }
+            if (!instantiatedPowerUps.ContainsKey(powerUp) || instantiatedPowerUps[powerUp] == null)
+            {
+                instantiatedPowerUps[powerUp] = Instantiate(powerUpPrefab, transform.position, Quaternion.identity);
+            }
+        }
     }
 }

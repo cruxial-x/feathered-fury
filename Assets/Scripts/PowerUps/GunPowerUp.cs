@@ -3,6 +3,10 @@ using UnityEngine;
 public class GunPowerUp : MonoBehaviour, IPowerUp
 {
     public GameObject gunPrefab;
+    [SerializeField] string powerUpName = "Gun";
+    public string PowerUpName { get { return powerUpName; } }
+    [SerializeField] int pointsRequired = 1;
+    public int PointsRequired { get { return pointsRequired; } }
     private BirdController bird;
 
     public void Apply(BirdController bird)
