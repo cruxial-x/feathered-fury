@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "feathered-fury.sln"
+    "dotnet.defaultSolution": "galactic-gambit.sln"
 }
