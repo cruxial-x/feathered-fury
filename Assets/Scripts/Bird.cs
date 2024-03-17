@@ -7,9 +7,6 @@ public class BirdController : MonoBehaviour
 {
     public Rigidbody2D rb;
     public GameController gameController;
-    public GameObject gunPrefab;
-    public float timeBetweenShots = 0.5f;
-    private float timeOfLastShot = 0;
     public Text scoreText;
     public Text highScoreText;
     public int score = 0;
@@ -17,7 +14,7 @@ public class BirdController : MonoBehaviour
     private int highScore;
     private bool isAlive;
     public float flapForce = 5;
-    public List<IPowerUp> activePowerUps = new List<IPowerUp>();
+    public List<IPowerUp> activePowerUps = new();
 
     // Start is called before the first frame update
     void Start()
@@ -99,8 +96,14 @@ void Update()
         }
         if (collider.gameObject.TryGetComponent<IPowerUp>(out var powerUp))
         {
+            // // Remove any existing powerups before applying the new one?
+            // foreach (var oldPowerUp in activePowerUps)
+            // {
+            //     oldPowerUp.Remove(this);
+            // }
             powerUp.Apply(this);
             activePowerUps.Add(powerUp);
+            Destroy(collider.gameObject);
         }
     }
         // Call this method when the bird clears a pipe

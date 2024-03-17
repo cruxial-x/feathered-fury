@@ -28,11 +28,11 @@ public class GunPowerUp : MonoBehaviour, IPowerUp
         if (FindObjectOfType<DestroyAfterAnimation>() == null)
         {
             // If not, instantiate a new one
-            GameObject gun = Instantiate(gunPrefab, transform);
+            GameObject gun = Instantiate(gunPrefab, bird.transform);
 
             // Get the direction to the mouse
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3 direction = (mousePosition - transform.position).normalized;
+            Vector3 direction = (mousePosition - bird.transform.position).normalized;
 
             // Calculate the rotation to face the mouse
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
