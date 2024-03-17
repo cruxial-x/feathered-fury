@@ -16,7 +16,7 @@ public class ProjectileController : MonoBehaviour
         }
         bird = GameObject.Find("Bird").GetComponent<BirdController>();
         // Destroy the Projectile after 5 seconds
-        Destroy(gameObject, 3);
+        Destroy(gameObject, 10);
     }
 
     // Update is called once per frame
